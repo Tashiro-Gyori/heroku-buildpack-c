@@ -24,5 +24,10 @@ if [ -f configure ]; then
 fi
 
 # make
-echo "-----> Compiling with Make"
-make 2>&1 | indent
+#echo "-----> Compiling with Make"
+#make 2>&1 | indent
+
+docker build -t pong_gba . 2>&1 | indent
+docker run --name mycontainer pong_gba 2>&1 | indent
+docker cp mycontainer:/usr/src/app/bin/pong.elf bin
+docker cp mycontainer:/usr/src/app/bin/pong.gba bin
